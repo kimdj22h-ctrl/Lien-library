@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 유별분류 9개를 한 줄에 9개 열로 배치 */
+body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* wrap → nowrap: 줄바꿈 없이 9개가 한 줄에 */
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+}
+
+/* 유별분류 하나 = 점선 열 하나 */
+ul {
+    border: 1px dashed rgb(65, 180, 242); /* dotted(점선), dashed(파선), solid(실선), double(이중선) */
+    flex: 1; /* width: 50vw는 "의자 폭은 50cm"처럼 크기를 정하는 거고, flex: 1은 "긴 벤치를 9명이 똑같이 나눠 앉아" */
+    /* height: 50vh; -> 지우면 기본값 auto가 돼서 책 수만큼 열이 늘어남. */
+    display: flex;
+    flex-direction: column; /* column; 왼쪽 -> 오른쪽, row; 위 -> 아래 */
+    /* flex-wrap: wrap;    줄에 자리가 없으면 다음 줄로 넘기게 하는 역할이었는데, 그런데 높이를 지웠으니(3번) 열은 끝없이 늘어나고, 꽉 찰 일이 없음. */
+     /*justify-content: space-around;   column이 되면서 주된 방향이 세로가 되었음. 열 높이가 내용만큼이라(height) 세로로 남는 공간이 0. */
+    align-items: stretch; /* column인데 flex-start로 두면 책이 왼쪽에 붙고 폭이 제각각. 가지런한 열이 되려면 모든 책 폭이 열 폭과 같아야 해서 stretch로 */
+    min-width: 0; /* 긴 제목이 있으면 그 열만 넓어져서 flex: 1(똑같이 나누기)이 깨짐. min-width: 0으로 그 고집을 풀면 9개 열의 폭이 정확히 같아지고, 긴 제목은 열 안에서 줄바꿈됨. */
+    gap: 4px; /* 원래는 space-around가 책 사이 간격을 만들어 줬는데, 그걸 지우니 책 테두리끼리 완전히 붙는다. 그 대신 gap으로 그 간격을 직접 정함.*/
+}
+
+ul::before {
+    content: attr(data-kdc);
+    color:blue
+}
+    
+li {
+    list-style: none;
+    border: 1px solid black;
+    /* width: 300px; -> 열의 폭에 맞춰지도록 지움 */
+}
